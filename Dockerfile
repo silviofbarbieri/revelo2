@@ -31,16 +31,20 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 # Modify setup.py to fix the version issue
-#RUN sed -i \"s/ISRELEASED = False/ISRELEASED = True/\" setup.py
+# RUN sed -i \"s/ISRELEASED = False/ISRELEASED = True/\" setup.py
 
 # Modify setup.py to remove test_suite option
-#RUN sed -i \"/test_suite/d\" setup.py
+# RUN sed -i \"/test_suite/d\" setup.py
+
+COPY . /app
+WORKDIR /app
+
 
 # Modifica setup.py para definir ISRELEASED como True
-RUN sed -i 's/ISRELEASED = False/ISRELEASED = True/' setup.py
+RUN sed -i 's/ISRELEASED = False/ISRELEASED = True/' ./setup.py
 
 # Modifica setup.py para remover a opção test_suite
-RUN sed -i '/test_suite/d' setup.py
+RUN sed -i '/test_suite/d' ./setup.py
 
 
 # Install scipy in editable mode with verbose output
